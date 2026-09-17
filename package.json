@@ -1,0 +1,28 @@
+{
+  "name": "dalil-mutamer",
+  "version": "2.1.0",
+  "description": "دليل المعتمر — Umrah companion with GPS tawaf/sai counting",
+  "main": "www/index.html",
+  "scripts": {
+    "sync": "cap sync android",
+    "build:android": "cap sync android && cd android && ./gradlew assembleDebug",
+    "icons": "npx @capacitor/assets generate --iconBackgroundColor '#0F4A38' --iconBackgroundColorDark '#000000' --android"
+  },
+  "keywords": ["umrah", "tawaf", "sai", "islamic", "capacitor"],
+  "author": "حسن جمال الليل (hsn.pmt)",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/android":     "^6.2.0",
+    "@capacitor/app":         "^6.0.2",
+    "@capacitor/core":        "^6.2.0",
+    "@capacitor/filesystem":  "^6.0.3",
+    "@capacitor/geolocation": "^6.1.0",
+    "@capacitor/haptics":     "^6.0.2",
+    "@capacitor/preferences": "^6.0.3",
+    "@capacitor/status-bar":  "^6.0.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli":    "^6.2.0"
+  }
+}

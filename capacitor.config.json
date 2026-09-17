@@ -1,0 +1,16 @@
+{
+  "appId": "com.hsnpmt.dalilmutamer",
+  "appName": "دليل المعتمر",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": true,
+    "backgroundColor": "#0F4A38"
+  },
+  "plugins": {
+    "Geolocation": { "permissions": ["location"] },
+    "StatusBar":   { "style": "DARK", "backgroundColor": "#0F4A38" }
+  }
+}

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#FFFFFF" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>دليل المعتمر</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Three.js r128 for the 3D Kaaba scene (loaded locally to avoid CDN issues) -->
+  <script src="vendor/three.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme-mode="system">
+
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__orb ambient__orb--1"></div>
+    <div class="ambient__orb ambient__orb--2"></div>
+    <div class="ambient__orb ambient__orb--3"></div>
+  </div>
+
+  <!-- Splash -->
+  <section id="screen-splash" class="screen screen--active">
+    <div class="splash">
+      <div class="splash__ring"></div>
+      <div class="splash__logo">
+        <svg viewBox="0 0 100 100" width="88" height="88"><rect x="20" y="30" width="60" height="55" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><rect x="20" y="30" width="60" height="8" fill="currentColor" opacity=".85"/><line x1="20" y1="55" x2="80" y2="55" stroke="currentColor" stroke-width="1.5" opacity=".6"/><circle cx="50" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+      </div>
+      <h1 class="splash__title">دليل المعتمر</h1>
+      <p class="splash__subtitle">دليلك في الطواف والسعي</p>
+    </div>
+  </section>
+
+  <!-- Home -->
+  <section id="screen-home" class="screen">
+    <header class="topbar">
+      <button class="iconbtn" data-nav="settings" aria-label="الإعدادات"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5a3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97c0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1c0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64z"/></svg></button>
+      <h1 class="topbar__title">دليل المعتمر</h1>
+      <button class="iconbtn" id="theme-toggle" aria-label="تبديل الوضع"><svg id="theme-icon-light" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10a5 5 0 0 0 0-10M2 13h2q.5 0 .5-.5T4 12H2q-.5 0-.5.5T2 13m18 0h2q.5 0 .5-.5t-.5-.5h-2q-.5 0-.5.5t.5.5M11 2v2q0 .5.5.5T12 4V2q0-.5-.5-.5T11 2m0 18v2q0 .5.5.5t.5-.5v-2q0-.5-.5-.5t-.5.5M5.6 6.7l-1-1a.5.5 0 0 0-.7.7l1 1q.3.3.7 0t0-.7m13.5 13.5l-1-1q-.3-.3-.7 0t0 .7l1 1a.5.5 0 0 0 .7-.7M18.4 6.7l1-1a.5.5 0 0 0-.7-.7l-1 1q-.3.3 0 .7t.7 0M4.9 20.2l1-1q.3-.3 0-.7t-.7 0l-1 1a.5.5 0 0 0 .7.7"/></svg><svg id="theme-icon-dark" viewBox="0 0 24 24" width="22" height="22" style="display:none"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.4 5.4 0 0 1-4.4 2.26a5.4 5.4 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg></button>
+    </header>
+
+    <main class="home">
+      <div class="greeting">
+        <p class="greeting__hello" id="greeting-name">أهلاً بك</p>
+        <p class="greeting__prompt" id="greeting-text">تقبّل الله منك</p>
+      </div>
+
+      <button class="banner" id="home-banner" data-nav="profile" style="display:none">
+        <div class="banner__icon"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m1 15h-2v-6h2m0-2h-2V7h2Z"/></svg></div>
+        <div class="banner__text"><div class="banner__t">أكمل بياناتك</div><div class="banner__s">اسمك، بلدك، هاتفك، فندقك، والفيزا</div></div>
+        <svg viewBox="0 0 24 24" width="20" height="20" style="color:var(--accent); transform:scaleX(-1)"><path fill="currentColor" d="M15.4 7.4L14 8.8l2.2 2.2H4v2h12.2L14 15.2l1.4 1.4L20 12z"/></svg>
+      </button>
+
+      <div class="card card--tawaf" data-nav="tawaf">
+        <div class="card__ring"></div>
+        <div class="card__icon"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 2L4 6v6c0 5 3.4 9.7 8 11c4.6-1.3 8-6 8-11V6l-8-4M8 8h8v2H8V8m0 3h8v6.5c-1.2 1-2.6 1.8-4 2.3c-1.4-.5-2.8-1.3-4-2.3V11Z"/></svg></div>
+        <div class="card__content"><div class="card__label">ابدأ الآن</div><h2 class="card__title">الطواف</h2><p class="card__sub">7 أشواط · محاكاة 3D + أدعية تلقائية</p></div>
+        <div class="card__arrow"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M15.4 7.4L14 8.8l2.2 2.2H4v2h12.2L14 15.2l1.4 1.4L20 12z"/></svg></div>
+      </div>
+
+      <div class="card card--sai" data-nav="sai">
+        <div class="card__ring"></div>
+        <div class="card__icon"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M13.5 5.5a2 2 0 1 0 0-4a2 2 0 0 0 0 4M9.8 8.9L7 23h2.1l1.8-8l2.1 2v6h2v-7.5l-2.1-2l.6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1c-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg></div>
+        <div class="card__content"><div class="card__label">ابدأ الآن</div><h2 class="card__title">السعي</h2><p class="card__sub">7 أشواط · تنبيه الهرولة تلقائي</p></div>
+        <div class="card__arrow"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M15.4 7.4L14 8.8l2.2 2.2H4v2h12.2L14 15.2l1.4 1.4L20 12z"/></svg></div>
+      </div>
+
+      <div class="card card--profile" data-nav="profile">
+        <div class="card__icon"><svg viewBox="0 0 24 24" width="30" height="30"><path fill="currentColor" d="M12 4a4 4 0 1 1-4 4a4 4 0 0 1 4-4m0 14c-4.42 0-8-1.79-8-4v-2h16v2c0 2.21-3.58 4-8 4Z"/></svg></div>
+        <div class="card__content"><div class="card__label">بيانات المعتمر</div><h2 class="card__title">الملف الشخصي</h2><p class="card__sub">الاسم، الفندق، المشرف، الفيزا</p></div>
+        <div class="card__arrow"><svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M15.4 7.4L14 8.8l2.2 2.2H4v2h12.2L14 15.2l1.4 1.4L20 12z"/></svg></div>
+      </div>
+
+      <p class="foot"><span>حسن جمال الليل</span><span class="foot__dot">·</span><span>hsn.pmt</span></p>
+    </main>
+  </section>
+
+  <!-- Profile -->
+  <section id="screen-profile" class="screen">
+    <header class="topbar">
+      <button class="iconbtn" data-nav="home" aria-label="رجوع"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M10 17l-5-5l5-5v3h9v4h-9z" transform="scale(-1,1) translate(-24,0)"/></svg></button>
+      <h1 class="topbar__title">بيانات المعتمر</h1>
+      <div style="width:40px"></div>
+    </header>
+    <main class="profile">
+      <div class="settings__group">
+        <div class="settings__title">البيانات الشخصية</div>
+        <div class="field"><label class="field__label" for="pf-name">الاسم الكامل</label><input class="field__input" id="pf-name" type="text" placeholder="مثال: أحمد محمد الأحمد"/></div>
+        <div class="field"><label class="field__label" for="pf-country">الدولة</label><input class="field__input" id="pf-country" type="text" placeholder="مثال: المملكة العربية السعودية"/></div>
+        <div class="field"><label class="field__label" for="pf-phone">رقم الهاتف</label><input class="field__input" id="pf-phone" type="tel" placeholder="+966 5xxxxxxxx" dir="ltr"/></div>
+        <div class="field">
+          <label class="field__label">الجنس</label>
+          <div class="radiogroup">
+            <label class="radio"><input type="radio" name="pf-gender" value="male"/><span>رجل</span></label>
+            <label class="radio"><input type="radio" name="pf-gender" value="female"/><span>امرأة</span></label>
+          </div>
+          <div class="field__hint">يُستخدم لتفعيل تنبيه الهرولة بين الميلين الأخضرين (للرجال فقط)</div>
+        </div>
+      </div>
+      <div class="settings__group">
+        <div class="settings__title">المشرف</div>
+        <div class="field"><label class="field__label" for="pf-supervisor">اسم المشرف</label><input class="field__input" id="pf-supervisor" type="text"/></div>
+        <div class="field"><label class="field__label" for="pf-supervisor-phone">رقم هاتف المشرف</label><input class="field__input" id="pf-supervisor-phone" type="tel" dir="ltr"/></div>
+      </div>
+      <div class="settings__group">
+        <div class="settings__title">الفندق</div>
+        <div class="field"><label class="field__label" for="pf-hotel">اسم الفندق</label><input class="field__input" id="pf-hotel" type="text" placeholder="مثال: فندق مكة تاور"/></div>
+        <div class="field">
+          <label class="field__label">موقع الفندق</label>
+          <div class="field__row">
+            <div class="field__info" id="pf-hotel-info">لم يُحدَّد بعد</div>
+            <button class="btn btn--sm btn--ghost" id="pf-hotel-clear" type="button" style="display:none">حذف</button>
+          </div>
+          <button class="btn btn--primary btn--sm btn--wide" id="pf-hotel-locate" type="button">
+            <svg viewBox="0 0 24 24" width="18" height="18" style="vertical-align:middle;margin-left:6px"><path fill="currentColor" d="M12 8a4 4 0 1 0 4 4a4 4 0 0 0-4-4m8.94 3A8.994 8.994 0 0 0 13 3.06V1h-2v2.06A8.994 8.994 0 0 0 3.06 11H1v2h2.06A8.994 8.994 0 0 0 11 20.94V23h2v-2.06A8.994 8.994 0 0 0 20.94 13H23v-2ZM12 19a7 7 0 1 1 7-7a7 7 0 0 1-7 7"/></svg>
+            حدّد موقع الفندق الحالي
+          </button>
+          <button class="btn btn--accent btn--sm btn--wide" id="pf-hotel-navigate" type="button" style="display:none; margin-top:8px">
+            <svg viewBox="0 0 24 24" width="18" height="18" style="vertical-align:middle;margin-left:6px"><path fill="currentColor" d="M21.71 11.29l-9-9a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42l9 9a1 1 0 0 0 1.42 0l9-9a1 1 0 0 0 0-1.42M14 14.5V12h-4v3H8v-4a1 1 0 0 1 1-1h5V7.5L17.5 11z"/></svg>
+            خذني إلى الفندق (اتجاهات)
+          </button>
+          <div class="field__hint">اضغط الزر وأنت داخل الفندق ليُحفَظ موقعه بدقة</div>
+        </div>
+      </div>
+      <div class="settings__group">
+        <div class="settings__title">الفيزا</div>
+        <div class="field">
+          <label class="field__label">صورة أو ملف الفيزا</label>
+          <div class="field__row">
+            <div class="field__info" id="pf-visa-info">لم تُرفع بعد</div>
+            <button class="btn btn--sm btn--ghost" id="pf-visa-view" type="button" style="display:none">عرض</button>
+            <button class="btn btn--sm btn--ghost" id="pf-visa-clear" type="button" style="display:none">حذف</button>
+          </div>
+          <label class="btn btn--primary btn--sm btn--wide" for="pf-visa-input" style="cursor:pointer">
+            <svg viewBox="0 0 24 24" width="18" height="18" style="vertical-align:middle;margin-left:6px"><path fill="currentColor" d="M9 16h6v-6h4l-7-7l-7 7h4Zm-4 2h14v2H5Z"/></svg>
+            رفع صورة أو PDF
+          </label>
+          <input id="pf-visa-input" type="file" accept="image/*,application/pdf" style="display:none"/>
+          <div class="field__hint">الحد الأقصى ٤ ميغا · تُحفظ محلياً على جهازك فقط</div>
+        </div>
+      </div>
+      <div class="about"><p class="about__b">جميع بياناتك محفوظة <b>محلياً على جهازك فقط</b>. لا يتم إرسال أي معلومات إلى خوادم خارجية.</p></div>
+    </main>
+  </section>
+
+  <!-- ══════════════════ Tawaf ══════════════════ -->
+  <section id="screen-tawaf" class="screen active-screen">
+    <header class="topbar">
+      <button class="iconbtn" data-nav="home" aria-label="رجوع"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M10 17l-5-5l5-5v3h9v4h-9z" transform="scale(-1,1) translate(-24,0)"/></svg></button>
+      <h1 class="topbar__title">الطواف</h1>
+      <button class="iconbtn" id="tawaf-reset" aria-label="إعادة"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6s-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8z"/></svg></button>
+    </header>
+
+    <!-- STICKY viz — stays visible while user scrolls the duas below -->
+    <div class="viz-sticky">
+      <div class="gps-status" id="tawaf-gps">
+        <span class="gps-dot"></span>
+        <span class="gps-label">جاري تحديد الموقع…</span>
+      </div>
+      <!-- Three.js Kaaba scene mounts inside this container -->
+      <div class="viz3d viz3d--tawaf" id="viz-tawaf"></div>
+    </div>
+
+    <main class="active-body">
+      <div class="counter counter--sm">
+        <div class="counter__halo"></div>
+        <svg class="counter__ring" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="88" class="counter__track"/>
+          <circle cx="100" cy="100" r="88" class="counter__progress" id="tawaf-progress" style="stroke-dasharray:552.9; stroke-dashoffset:552.9;"/>
+        </svg>
+        <div class="counter__inner">
+          <div class="counter__label">الشوط</div>
+          <div class="counter__number" id="tawaf-number">0</div>
+          <div class="counter__of">من ٧</div>
+        </div>
+      </div>
+
+      <div class="dua-card" id="tawaf-dua"></div>
+
+      <div class="actions">
+        <button class="btn btn--ghost" id="tawaf-pause">إيقاف مؤقت</button>
+        <button class="btn btn--primary" id="tawaf-add">شوط + (يدوي)</button>
+      </div>
+
+      <div class="stats" id="tawaf-stats">
+        <div class="stat"><div class="stat__v" id="tawaf-time">00:00</div><div class="stat__l">الوقت</div></div>
+        <div class="stat"><div class="stat__v" id="tawaf-mode">—</div><div class="stat__l">المنطقة</div></div>
+        <div class="stat"><div class="stat__v" id="tawaf-dist">—</div><div class="stat__l">للكعبة (م)</div></div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ══════════════════ Sa'i ══════════════════ -->
+  <section id="screen-sai" class="screen active-screen">
+    <header class="topbar">
+      <button class="iconbtn" data-nav="home" aria-label="رجوع"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M10 17l-5-5l5-5v3h9v4h-9z" transform="scale(-1,1) translate(-24,0)"/></svg></button>
+      <h1 class="topbar__title">السعي</h1>
+      <button class="iconbtn" id="sai-reset" aria-label="إعادة"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6s-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8s-3.58-8-8-8z"/></svg></button>
+    </header>
+
+    <!-- STICKY sa'i viz — vertical (Safa top, Marwa bottom) -->
+    <div class="viz-sticky">
+      <div class="gps-status" id="sai-gps">
+        <span class="gps-dot"></span>
+        <span class="gps-label">جاري تحديد الموقع…</span>
+      </div>
+
+      <div class="viz-sai">
+        <!-- Marwa peak (TOP) -->
+        <div class="viz-sai__peak viz-sai__peak--marwa">
+          <div class="viz-sai__peak-icon">
+            <svg viewBox="0 0 40 30" width="34" height="26"><path fill="currentColor" d="M20 4L4 28h32z"/></svg>
+          </div>
+          <div class="viz-sai__peak-label">المروة</div>
+        </div>
+
+        <!-- Vertical path between the peaks -->
+        <div class="viz-sai__path" id="viz-sai-path">
+          <div class="viz-sai__green" id="viz-sai-green"></div>
+          <div class="viz-sai__mile viz-sai__mile--start"></div>
+          <div class="viz-sai__mile viz-sai__mile--end"></div>
+          <div class="viz-sai__walker" id="viz-sai-walker">
+            <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M13.5 5.5a2 2 0 1 0 0-4a2 2 0 0 0 0 4M9.8 8.9L7 23h2.1l1.8-8l2.1 2v6h2v-7.5l-2.1-2l.6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1c-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
+          </div>
+        </div>
+
+        <!-- Safa peak (BOTTOM) -->
+        <div class="viz-sai__peak viz-sai__peak--safa">
+          <div class="viz-sai__peak-icon">
+            <svg viewBox="0 0 40 30" width="34" height="26"><path fill="currentColor" d="M20 4L4 28h32z"/></svg>
+          </div>
+          <div class="viz-sai__peak-label">الصفا</div>
+        </div>
+
+        <div class="viz-sai__info" id="viz-sai-info">تتوجّه إلى المروة ↑</div>
+      </div>
+    </div>
+
+    <main class="active-body">
+      <div class="counter counter--sm">
+        <div class="counter__halo"></div>
+        <svg class="counter__ring" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="88" class="counter__track"/>
+          <circle cx="100" cy="100" r="88" class="counter__progress" id="sai-progress" style="stroke-dasharray:552.9; stroke-dashoffset:552.9;"/>
+        </svg>
+        <div class="counter__inner">
+          <div class="counter__label">الشوط</div>
+          <div class="counter__number" id="sai-number">0</div>
+          <div class="counter__of">من ٧</div>
+        </div>
+      </div>
+
+      <div class="dua-card" id="sai-dua"></div>
+
+      <div class="actions">
+        <button class="btn btn--ghost" id="sai-pause">إيقاف مؤقت</button>
+        <button class="btn btn--primary" id="sai-add">شوط + (يدوي)</button>
+      </div>
+
+      <button class="btn btn--accent btn--wide" id="sai-next" style="display:none; margin-top:10px">
+        التالي: الحلاقة أو التقصير ✂️
+      </button>
+
+      <div class="stats">
+        <div class="stat"><div class="stat__v" id="sai-time">00:00</div><div class="stat__l">الوقت</div></div>
+        <div class="stat"><div class="stat__v" id="sai-target">المروة</div><div class="stat__l">الوجهة</div></div>
+        <div class="stat"><div class="stat__v" id="sai-dist">—</div><div class="stat__l">المسافة (م)</div></div>
+      </div>
+    </main>
+  </section>
+
+  <!-- Settings -->
+  <section id="screen-settings" class="screen">
+    <header class="topbar">
+      <button class="iconbtn" data-nav="home" aria-label="رجوع"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M10 17l-5-5l5-5v3h9v4h-9z" transform="scale(-1,1) translate(-24,0)"/></svg></button>
+      <h1 class="topbar__title">الإعدادات</h1>
+      <div style="width:40px"></div>
+    </header>
+    <main class="settings">
+      <div class="settings__group">
+        <div class="settings__title">الحساب</div>
+        <button class="setting setting--link" data-nav="profile" type="button">
+          <div class="setting__label"><div>بيانات المعتمر</div><div class="setting__sub">الاسم، الفندق، المشرف، الفيزا</div></div>
+          <svg viewBox="0 0 24 24" width="20" height="20" style="color:var(--accent); transform:scaleX(-1)"><path fill="currentColor" d="M15.4 7.4L14 8.8l2.2 2.2H4v2h12.2L14 15.2l1.4 1.4L20 12z"/></svg>
+        </button>
+      </div>
+      <div class="settings__group">
+        <div class="settings__title">المظهر</div>
+        <div class="setting"><div class="setting__label">الوضع</div>
+          <div class="themepick" id="themepick"><button class="themepick__opt" data-mode="light">فاتح</button><button class="themepick__opt" data-mode="dark">داكن</button><button class="themepick__opt active" data-mode="system">تلقائي</button></div>
+        </div>
+        <div class="setting"><div class="setting__label">حجم الخط</div>
+          <select id="set-fontsize" class="select"><option value="s">صغير</option><option value="m" selected>عادي</option><option value="l">كبير</option></select>
+        </div>
+      </div>
+      <div class="settings__group">
+        <div class="settings__title">التنبيهات</div>
+        <div class="setting"><div class="setting__label">اهتزاز عند كل شوط</div><label class="switch"><input type="checkbox" id="set-haptic" checked/><span></span></label></div>
+      </div>
+      <div class="about">
+        <p class="about__t">دليل المعتمر</p>
+        <p class="about__b">مرافق للمعتمر يحسب أشواط الطواف والسعي تلقائياً عبر GPS، ويعرض الأدعية الكاملة حسب موقعك، وينبهك للهرولة بين الميلين الأخضرين، ويرشدك للحلاقة أو التقصير بعد السعي. محاكاة ثلاثية الأبعاد للكعبة مع أسماء الأركان والباب والميزاب.</p>
+        <p class="about__b">تصميم وتطوير: حسن جمال الليل · hsn.pmt</p>
+        <p class="about__v">الإصدار 2.3.0</p>
+      </div>
+    </main>
+  </section>
+
+  <!-- Visa modal -->
+  <div class="visa-modal" id="visa-modal" aria-hidden="true">
+    <div class="visa-modal__backdrop" id="visa-modal-backdrop"></div>
+    <div class="visa-modal__sheet">
+      <header class="visa-modal__head">
+        <h3 class="visa-modal__title" id="visa-modal-title">الفيزا</h3>
+        <button class="iconbtn" id="visa-modal-close" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M19 6.4L17.6 5L12 10.6L6.4 5L5 6.4L10.6 12L5 17.6L6.4 19L12 13.4L17.6 19L19 17.6L13.4 12z"/></svg></button>
+      </header>
+      <div class="visa-modal__body" id="visa-modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
