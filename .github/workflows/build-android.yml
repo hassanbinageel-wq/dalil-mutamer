@@ -1,0 +1,98 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-34 build-tools;34.0.0'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Add Android platform (fresh)
+        run: npx cap add android
+
+      - name: Generate app icons from resources/icon.png
+        run: |
+          if [ -f resources/icon.png ]; then
+            npx @capacitor/assets generate \
+              --iconBackgroundColor '#0F4A38' \
+              --iconBackgroundColorDark '#000000' \
+              --android
+          else
+            echo "⚠ resources/icon.png not found — using default Capacitor icon"
+          fi
+
+      - name: Configure app permissions (Geolocation + Vibrate)
+        run: |
+          python3 <<'PY'
+          import re
+          p = 'android/app/src/main/AndroidManifest.xml'
+          s = open(p, 'r', encoding='utf-8').read()
+          perms = [
+              'android.permission.ACCESS_FINE_LOCATION',
+              'android.permission.ACCESS_COARSE_LOCATION',
+              'android.permission.VIBRATE',
+          ]
+          add = ''.join(f'\n    <uses-permission android:name="{n}" />' for n in perms if n not in s)
+          if add:
+              s = re.sub(r'(<manifest[^>]*>)', r'\1' + add, s, count=1)
+              open(p, 'w', encoding='utf-8').write(s)
+          print(open(p).read())
+          PY
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Grant Gradle permission
+        run: chmod +x android/gradlew
+
+      - name: Build debug APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Rename APK
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk dalil-mutamer-debug.apk
+          ls -lh dalil-mutamer-debug.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dalil-mutamer-apk
+          path: dalil-mutamer-debug.apk
+          retention-days: 30
+
+      - name: Create Release (only for tagged pushes)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dalil-mutamer-debug.apk
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
